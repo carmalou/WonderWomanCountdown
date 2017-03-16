@@ -1,9 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import moment from 'moment';
+import MovieData from './../config.json';
 
-class Movie extends React.Component {
+var rightNow = moment();
+var movieName = MovieData.movie_name;
+var movieDate = MovieData.date;
+
+
+
+export default class Movie extends React.Component {
   render() {
-    return <h1>Hello World</h1>;
+    return (
+      <div>
+        <h1>Can I go see {movieName} yet?</h1>
+        <h1>No. Wonder Woman will arrive to save us on: { movieDate }</h1>
+      </div>
+    );
   }
 }
