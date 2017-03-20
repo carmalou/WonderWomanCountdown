@@ -13,15 +13,22 @@ var waitingForWonderWoman = moment(rightNow).isAfter(momentMovieDate);
 var yesOrNo = waitingForWonderWoman ? 'No' : 'Yes';
 var secondaryText = waitingForWonderWoman ? 'Wonder Woman will arrive to save us on: ' + movieDate : 'What are you waiting for? <a href="#">Buy a ticket!</a>';
 
-function countdownToWorldSaving() {
-  console.log('countdownToWorldSaving');
-  var tmpHowMuchLonger = moment(momentMovieDate).countdown().toString();
-  tmpHowMuchLonger = 'You can go see Wonder Woman in: ' + tmpHowMuchLonger;
-  console.log('howMuchLonger ', tmpHowMuchLonger);
-  return tmpHowMuchLonger;
-}
-
 export default class Movie extends React.Component {
+
+  countdownToWorldSaving() {
+    console.log('countdownToWorldSaving');
+    var tmpHowMuchLonger = moment(momentMovieDate).countdown().toString();
+    tmpHowMuchLonger = 'You can go see Wonder Woman in: ' + tmpHowMuchLonger;
+    console.log('howMuchLonger ', tmpHowMuchLonger);
+    return tmpHowMuchLonger;
+  }
+
+  seeminglyUselessWrapper() {
+    // this.setState({howMuchLonger: countdownToWorldSaving()});
+    console.log('this.setState within Component ', this.setState);
+    console.log(countdownToWorldSaving());
+  }
+
   constructor() {
     super();
 
@@ -30,17 +37,20 @@ export default class Movie extends React.Component {
     };
   }
 
+  componentDidMount() {
+    window.setInterval(seeminglyUselessWrapper, 1000);
+  }
+
   render() {
     console.log('this ', this);
     console.log('this.state ', this.state);
     console.log('this.setState ', this.setState);
 
-    function seeminglyUselessWrapper() {
-      // this.setState({howMuchLonger: countdownToWorldSaving()});
-      console.log(countdownToWorldSaving());
-    }
+    // function seeminglyUselessWrapper() {
+    //   // this.setState({howMuchLonger: countdownToWorldSaving()});
+    //   console.log(countdownToWorldSaving());
+    // }
 
-    window.setInterval(seeminglyUselessWrapper, 1000);
     return (
       <div>
         <h1>Can I go see {movieName} yet?</h1>
