@@ -20,6 +20,9 @@ export default class Movie extends React.Component {
     this.state = {
       howMuchLonger: 'pineapple'
     };
+
+    this.countdownToWorldSaving = this.countdownToWorldSaving.bind(this);
+    this.seeminglyUselessWrapper = this.seeminglyUselessWrapper.bind(this);
   }
 
   componentDidMount() {
@@ -35,17 +38,18 @@ export default class Movie extends React.Component {
     tmpHowMuchLonger = 'You can go see Wonder Woman in: ' + tmpHowMuchLonger;
     console.log('howMuchLonger ', tmpHowMuchLonger);
     return tmpHowMuchLonger;
-  }.bind(this);
+  }
 
   seeminglyUselessWrapper(componentScope) {
+    console.log('seeminglyUselessWrapper');
     var that = componentScope;
     console.log('this ', this);
     console.log('is this even being called');
     console.log('countdownToWorldSaving ', this.countdownToWorldSaving);
-    // this.setState({howMuchLonger: this.countdownToWorldSaving()});
+    this.setState({howMuchLonger: this.countdownToWorldSaving()});
     console.log('this.setState within Component ', this.setState);
     console.log(this.countdownToWorldSaving()); // why is this undefined??
-  }.bind(this);
+  }
 
   render() {
     console.log('this ', this);
