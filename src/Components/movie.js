@@ -18,37 +18,30 @@ export default class Movie extends React.Component {
     super();
 
     this.state = {
-      howMuchLonger: 'pineapple'
+      howMuchLonger: null
     };
   }
 
   componentDidMount() {
-    console.log('countdown ', this.countdownToWorldSaving);
-    console.log('uselesswrapper ', this.seeminglyUselessWrapper);
-    setInterval(this.seeminglyUselessWrapper, 1000);
+    // for some stupid reason the arrow function preserves the correct scope, but tradition function calls don't. WTF
+    setInterval(
+      () =>
+        this.seeminglyUselessWrapper(),
+        1000
+      );
   }
 
   countdownToWorldSaving() {
-    console.log('countdownToWorldSaving');
     var tmpHowMuchLonger = moment(momentMovieDate).countdown().toString();
     tmpHowMuchLonger = 'You can go see Wonder Woman in: ' + tmpHowMuchLonger;
-    console.log('howMuchLonger ', tmpHowMuchLonger);
     return tmpHowMuchLonger;
   }
 
   seeminglyUselessWrapper() {
-    console.log('is this even being called');
-    console.log('countdownToWorldSaving ', this.countdownToWorldSaving);
-    // this.setState({howMuchLonger: this.countdownToWorldSaving()});
-    console.log('this.setState within Component ', this.setState);
-    console.log(this.countdownToWorldSaving()); // why is this undefined??
+    this.setState({howMuchLonger: this.countdownToWorldSaving()});
   }
 
   render() {
-    console.log('this ', this);
-    console.log('this.state ', this.state);
-    console.log('this.setState ', this.setState);
-
     return (
       <div>
         <h1>Can I go see {movieName} yet?</h1>
