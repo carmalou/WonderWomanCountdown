@@ -12,24 +12,40 @@ var momentMovieDate = moment(movieDate).format();
 var waitingForWonderWoman = moment(rightNow).isAfter(momentMovieDate);
 var yesOrNo = waitingForWonderWoman ? 'No' : 'Yes';
 var secondaryText = waitingForWonderWoman ? 'Wonder Woman will arrive to save us on: ' + movieDate : 'What are you waiting for? <a href="#">Buy a ticket!</a>';
-var howMuchLonger = 'lskdjfs';
 
 function countdownToWorldSaving() {
   console.log('countdownToWorldSaving');
-  howMuchLonger = moment(momentMovieDate).countdown().toString();
-  howMuchLonger = 'You can go see Wonder Woman in: ' + howMuchLonger;
-  console.log('howMuchLonger ', howMuchLonger);
+  var tmpHowMuchLonger = moment(momentMovieDate).countdown().toString();
+  tmpHowMuchLonger = 'You can go see Wonder Woman in: ' + tmpHowMuchLonger;
+  console.log('howMuchLonger ', tmpHowMuchLonger);
+  return tmpHowMuchLonger;
 }
 
-window.setInterval(countdownToWorldSaving, 1000);
-countdownToWorldSaving().bind(this);
-
 export default class Movie extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {
+      howMuchLonger: 'pineapple'
+    };
+  }
+
   render() {
+    console.log('this ', this);
+    console.log('this.state ', this.state);
+    console.log('this.setState ', this.setState);
+
+    function seeminglyUselessWrapper() {
+      // this.setState({howMuchLonger: countdownToWorldSaving()});
+      console.log(countdownToWorldSaving());
+    }
+
+    window.setInterval(seeminglyUselessWrapper, 1000);
     return (
       <div>
         <h1>Can I go see {movieName} yet?</h1>
         <h1>{yesOrNo}. {secondaryText}</h1>
+        <h1>{this.state.howMuchLonger}</h1>
       </div>
     );
   }
