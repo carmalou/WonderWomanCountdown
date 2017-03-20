@@ -18,34 +18,40 @@ export default class Movie extends React.Component {
     super();
 
     this.state = {
-      howMuchLonger: null
+      howMuchLonger: 'pineapple'
     };
   }
 
   componentDidMount() {
-    // for some stupid reason the arrow function preserves the correct scope, but tradition function calls don't. WTF
-    this.WWTimer = setInterval(
-      () =>
-        this.seeminglyUselessWrapper(),
-        1000
-      );
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.WWTimer);
+    console.log('didmount this ', this);
+    console.log('countdown ', this.countdownToWorldSaving);
+    console.log('uselesswrapper ', this.seeminglyUselessWrapper);
+    setInterval(this.seeminglyUselessWrapper, 1000);
   }
 
   countdownToWorldSaving() {
+    console.log('countdownToWorldSaving');
     var tmpHowMuchLonger = moment(momentMovieDate).countdown().toString();
     tmpHowMuchLonger = 'You can go see Wonder Woman in: ' + tmpHowMuchLonger;
+    console.log('howMuchLonger ', tmpHowMuchLonger);
     return tmpHowMuchLonger;
-  }
+  }.bind(this);
 
-  seeminglyUselessWrapper() {
-    this.setState({howMuchLonger: this.countdownToWorldSaving()});
-  }
+  seeminglyUselessWrapper(componentScope) {
+    var that = componentScope;
+    console.log('this ', this);
+    console.log('is this even being called');
+    console.log('countdownToWorldSaving ', this.countdownToWorldSaving);
+    // this.setState({howMuchLonger: this.countdownToWorldSaving()});
+    console.log('this.setState within Component ', this.setState);
+    console.log(this.countdownToWorldSaving()); // why is this undefined??
+  }.bind(this);
 
   render() {
+    console.log('this ', this);
+    console.log('this.state ', this.state);
+    console.log('this.setState ', this.setState);
+
     return (
       <div>
         <h1>Can I go see {movieName} yet?</h1>
