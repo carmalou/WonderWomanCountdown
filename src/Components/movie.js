@@ -24,11 +24,15 @@ export default class Movie extends React.Component {
 
   componentDidMount() {
     // for some stupid reason the arrow function preserves the correct scope, but tradition function calls don't. WTF
-    setInterval(
+    this.WWTimer = setInterval(
       () =>
         this.seeminglyUselessWrapper(),
         1000
       );
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.WWTimer);
   }
 
   countdownToWorldSaving() {
