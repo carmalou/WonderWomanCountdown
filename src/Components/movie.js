@@ -14,6 +14,19 @@ var yesOrNo = waitingForWonderWoman ? 'No' : 'Yes';
 var secondaryText = waitingForWonderWoman ? 'Wonder Woman will arrive to save us on: ' + movieDate : 'What are you waiting for? <a href="#">Buy a ticket!</a>';
 
 export default class Movie extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {
+      howMuchLonger: 'pineapple'
+    };
+  }
+
+  componentDidMount() {
+    console.log('countdown ', this.countdownToWorldSaving);
+    console.log('uselesswrapper ', this.seeminglyUselessWrapper);
+    setInterval(this.seeminglyUselessWrapper, 1000);
+  }
 
   countdownToWorldSaving() {
     console.log('countdownToWorldSaving');
@@ -24,32 +37,17 @@ export default class Movie extends React.Component {
   }
 
   seeminglyUselessWrapper() {
-    // this.setState({howMuchLonger: countdownToWorldSaving()});
+    console.log('is this even being called');
+    console.log('countdownToWorldSaving ', this.countdownToWorldSaving);
+    // this.setState({howMuchLonger: this.countdownToWorldSaving()});
     console.log('this.setState within Component ', this.setState);
-    console.log(countdownToWorldSaving());
-  }
-
-  constructor() {
-    super();
-
-    this.state = {
-      howMuchLonger: 'pineapple'
-    };
-  }
-
-  componentDidMount() {
-    window.setInterval(seeminglyUselessWrapper, 1000);
+    console.log(this.countdownToWorldSaving()); // why is this undefined??
   }
 
   render() {
     console.log('this ', this);
     console.log('this.state ', this.state);
     console.log('this.setState ', this.setState);
-
-    // function seeminglyUselessWrapper() {
-    //   // this.setState({howMuchLonger: countdownToWorldSaving()});
-    //   console.log(countdownToWorldSaving());
-    // }
 
     return (
       <div>
