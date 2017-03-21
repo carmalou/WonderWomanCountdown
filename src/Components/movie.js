@@ -49,3 +49,11 @@ export default class Movie extends React.Component {
     );
   }
 }
+
+export class Hello extends React.Component {
+  render() {
+    return(
+      <h1>Hello {this.props.name}!</h1>
+    );
+  }
+}
