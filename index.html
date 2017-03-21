@@ -60,11 +60,11 @@ class: left, middle, inverse
 # Pros and Cons
 
 * Great for beginners to download and start building immediately
-* Non-configurable, so it might not be ideal for a more experienced React dev
+* Non-configurable build set-up, so it might not be ideal for a more experienced React dev
 ---
 class: left, middle, inverse
 
-# There is an eject command, if you want to use this as a boilerplate project. See the [readme](readme) for more info!
+# There is an eject command, if you want to use this as a boilerplate project. See the [readme](https://github.com/facebookincubator/create-react-app#converting-to-a-custom-setup) for more info!
 ---
 class: center, middle, inverse
 
@@ -183,11 +183,15 @@ export default class Movie extends React.Component {
     this.state = {
       name: null
     };
+
+    this.getNameFromAPI() = this.getNameFromAPI.bind(this);
   }
 
-  this.getNameFromAPI().then(function(response) {
-    this.setState({name: response.data.name});
-  })
+  componentDidMount() {
+    this.getNameFromAPI().then(function(response) {
+      this.setState({name: response.data.name});
+    }.bind(this));
+  }
 
   render() {
     return(
@@ -198,8 +202,38 @@ export default class Movie extends React.Component {
 ```
 
 ???
-Make sure you can use promises in react and that that is a good representation
+Notice I am binding to `this` in the constructor, as well as in the then. If you don't use arrow functions in react, `this` will default to window. The way around that is the .bind(this) that I am using.
 
+---
+class: left, middle, inverse
+
+# [Lifecycle Events](https://facebook.github.io/react/docs/react-component.html)
+
+Lifecycle Events take place at different points while your app is loading.
+
+```javascript
+componentDidMount() {
+  this.getNameFromAPI().then(function(response) {
+    this.setState({name: response.data.name});
+  }.bind(this));
+}
+```
+
+`componentDidMount` is called directly after the component is rendered, so this is a good place to make an API call.
+---
+class: left, middle, inverse
+
+# References
+
+* https://facebook.github.io/react/docs/rendering-elements.html#updating-the-rendered-element
+* https://facebook.github.io/react/docs/components-and-props.html
+* https://facebook.github.io/react/docs/state-and-lifecycle.html
+* https://github.com/facebookincubator/create-react-app
+* https://facebook.github.io/react/docs/handling-events.html
+* https://medium.com/@housecor/react-binding-patterns-5-approaches-for-handling-this-92c651b5af56#.xa67ez6s7
+* https://medium.com/@dan_abramov/you-might-not-need-redux-be46360cf367#.lt76p1ify
+* http://redux.js.org/
+* https://facebook.github.io/react/docs/react-component.html
 
 
 </textarea>
