@@ -11,7 +11,7 @@ var movieName = MovieData.movie_name;
 var movieDate = MovieData.date;
 var momentMovieDate = moment(movieDate).format();
 var waitingForWonderWoman = moment(rightNow).isBefore(momentMovieDate);
-var yesOrNo = waitingForWonderWoman ? 'Yes' : 'No';
+var yesOrNo = waitingForWonderWoman ? 'No' : 'Yes';
 
 export default class Movie extends React.Component {
   constructor() {
@@ -29,7 +29,7 @@ export default class Movie extends React.Component {
   }
 
   countdownToWorldSaving() {
-    if(yesOrNo == 'No') {
+    if(yesOrNo == 'Yes') {
       this.setState({howMuchLonger: 'right now!'});
       return;
     }
