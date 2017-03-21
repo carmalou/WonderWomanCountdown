@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import Movie from './Components/movie.js';
 import './App.css';
 

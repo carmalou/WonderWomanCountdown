@@ -3,64 +3,48 @@ import ReactDOM from 'react-dom';
 import moment from 'moment';
 import countdown from 'countdown';
 import momentCountdown from 'moment-countdown';
+
 import MovieData from './../config.json';
 
 var rightNow = moment().format();
 var movieName = MovieData.movie_name;
 var movieDate = MovieData.date;
 var momentMovieDate = moment(movieDate).format();
-var waitingForWonderWoman = moment(rightNow).isAfter(momentMovieDate);
-var yesOrNo = waitingForWonderWoman ? 'No' : 'Yes';
-var secondaryText = waitingForWonderWoman ? 'Wonder Woman will arrive to save us on: ' + movieDate : 'What are you waiting for? <a href="#">Buy a ticket!</a>';
+var waitingForWonderWoman = moment(rightNow).isBefore(momentMovieDate);
+var yesOrNo = waitingForWonderWoman ? 'Yes' : 'No';
 
 export default class Movie extends React.Component {
   constructor() {
     super();
 
     this.state = {
-      howMuchLonger: 'pineapple'
+      howMuchLonger: null
     };
 
     this.countdownToWorldSaving = this.countdownToWorldSaving.bind(this);
-    this.seeminglyUselessWrapper = this.seeminglyUselessWrapper.bind(this);
   }
 
   componentDidMount() {
-    console.log('didmount this ', this);
-    console.log('countdown ', this.countdownToWorldSaving);
-    console.log('uselesswrapper ', this.seeminglyUselessWrapper);
-    setInterval(this.seeminglyUselessWrapper, 1000);
+    setInterval(this.countdownToWorldSaving, 1000);
   }
 
   countdownToWorldSaving() {
-    console.log('countdownToWorldSaving');
+    if(yesOrNo == 'No') {
+      this.setState({howMuchLonger: 'right now!'});
+      return;
+    }
     var tmpHowMuchLonger = moment(momentMovieDate).countdown().toString();
-    tmpHowMuchLonger = 'You can go see Wonder Woman in: ' + tmpHowMuchLonger;
-    console.log('howMuchLonger ', tmpHowMuchLonger);
-    return tmpHowMuchLonger;
-  }
-
-  seeminglyUselessWrapper(componentScope) {
-    console.log('seeminglyUselessWrapper');
-    var that = componentScope;
-    console.log('this ', this);
-    console.log('is this even being called');
-    console.log('countdownToWorldSaving ', this.countdownToWorldSaving);
-    this.setState({howMuchLonger: this.countdownToWorldSaving()});
-    console.log('this.setState within Component ', this.setState);
-    console.log(this.countdownToWorldSaving()); // why is this undefined??
+    this.setState({howMuchLonger: 'in ' + tmpHowMuchLonger});
   }
 
   render() {
-    console.log('this ', this);
-    console.log('this.state ', this.state);
-    console.log('this.setState ', this.setState);
-
     return (
-      <div>
-        <h1>Can I go see {movieName} yet?</h1>
-        <h1>{yesOrNo}. {secondaryText}</h1>
-        <h1>{this.state.howMuchLonger}</h1>
+      <div className="parent-div center-align">
+        <div className="center-align">
+          <h1 className="App">Can I go see {movieName} yet?</h1>
+          <h1 className="App">{yesOrNo}. <a href="http://www.fandango.com/wonderwoman_191725/movietimes" target="_blank">Get your ticket now.</a></h1>
+          <h1 className="App">You can go see Wonder Woman {this.state.howMuchLonger}</h1>
+        </div>
       </div>
     );
   }
