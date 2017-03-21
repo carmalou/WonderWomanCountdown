@@ -92,7 +92,7 @@ App.js:
 ```javascript
 import Hello from './Components/hello.js';
 
-class App extends Component {
+class App extends React.Component {
   render() {
     return (
       <Hello></Hello>
@@ -126,7 +126,7 @@ App.js:
 ```javascript
 import Hello from './Components/hello.js';
 
-class App extends Component {
+class App extends React.Component {
   render() {
     return (
       <Hello name="Carmen"></Hello>
@@ -184,7 +184,7 @@ export default class Movie extends React.Component {
       name: null
     };
 
-    this.getNameFromAPI() = this.getNameFromAPI.bind(this);
+    this.getNameFromAPI = this.getNameFromAPI.bind(this);
   }
 
   componentDidMount() {
